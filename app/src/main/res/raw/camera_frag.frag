@@ -1,0 +1,20 @@
+//片元着色器  贴图、上颜色
+#extension GL_OES_EGL_image_external : require
+//摄像头数据比较特殊的一个地方
+
+precision mediump float;//数据精度
+varying vec2 aCoord;
+
+uniform samplerExternalOES vTexture;//samplerExternalOES:图片，采样器   外部纹理
+
+void main() {
+    //texture2D: vTexture采样器，采样 aCoord 这个像素点的RGBA值
+    vec4 rgba = texture2D(vTexture,aCoord);//rgba
+    gl_FragColor = rgba;
+//    gl_FragColor = vec4(1.-rgba.r,1.-rgba.g,1.-rgba.b,rgba.a);
+//    gl_FragColor = vec4(rgba.b,rgba.g,rgba.r,rgba.a);
+
+    //灰度图
+//    float c = (rgba.r*0.3+rgba.g*0.59+rgba.b*0.11)/3.0;
+//    gl_FragColor = vec4(c,c,c,1.0);
+}
